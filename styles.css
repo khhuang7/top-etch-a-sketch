@@ -3,6 +3,11 @@
   width: 100%;
 }
 
-.hover {
+.pixel {
+  aspect-ratio : 1 / 1;
+  background-color: black;
+}
+
+.highlight {
   background-color: white;
 }
