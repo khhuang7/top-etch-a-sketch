@@ -23,9 +23,15 @@ function generateGrid(squares) {
   }  
 }
 
+// Change background to a random color
 function highlight() {
-  if (!this.classList.contains('highlight')) {
-    this.classList.toggle('highlight');
+  let bgColor = getComputedStyle(this)['background-color'];
+  // console.log(bgColor);
+  if (bgColor == "rgb(0, 0, 0)") {
+    let newColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+    // console.log(newColor);
+    this.style.backgroundColor = newColor;
+    // console.log(this.style.backgroundColor);
   }
 }
 
