@@ -23,15 +23,37 @@ function generateGrid(squares) {
   }  
 }
 
-// Change background to a random color
+// Change background to a random color with a progressive whitening effect where each interaction adds 10% more white or color to the square. The objective is to achieve a completely white square only after ten interactions.
 function highlight() {
-  let bgColor = getComputedStyle(this)['background-color'];
   // console.log(bgColor);
-  if (bgColor == "rgb(0, 0, 0)") {
+  if (!this.classList.contains('touched')) {
     let newColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
     // console.log(newColor);
     this.style.backgroundColor = newColor;
-    // console.log(this.style.backgroundColor);
+    console.log(this.style.backgroundColor);
+
+    this.className += ' touched';
+    Object.defineProperty(this, 'counter', {
+      value: 1,
+      writable: true
+    });
+    console.log(this.counter);
+
+  } else if (this.counter < 10) {
+    let bgColor = getComputedStyle(this)['background-color'];
+    let rgbColors = bgColor.slice(bgColor.indexOf("(") + 1, 
+      bgColor.indexOf(")")
+      ).split(", ");
+    // console.log(rgbColors);
+    let newColors = rgbColors.map((val) => {
+      valInt = parseInt(val);
+      return valInt + (255 - valInt) / (10 - this.counter);
+    })
+    // console.log(newColors);
+    this.style.backgroundColor = 'rgb(' + newColors[0] + ', ' + newColors[1] +
+      ', ' + newColors[2] + ')';
+    console.log(this.style.backgroundColor);
+    this.counter++;
   }
 }
 
