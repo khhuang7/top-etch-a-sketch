@@ -5,7 +5,7 @@ const style = document.createElement('style');
 function generateGrid(squares) {
   container.replaceChildren([]);
   style.innerHTML = `.pixel {\n
-    width: ${90 / squares}vmin; \n
+    width: ${85 / squares}vmin; \n
     }`;
   document.head.appendChild(style);
   
